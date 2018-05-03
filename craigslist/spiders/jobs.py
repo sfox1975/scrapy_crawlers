@@ -31,5 +31,9 @@ class JobsSpider(scrapy.Spider):
  
         compensation = response.xpath('//p[@class="attrgroup"]/span[1]/b/text()').extract_first()
         employment_type = response.xpath('//p[@class="attrgroup"]/span[2]/b/text()').extract_first()
+        posted = response.xpath('//p[@class="postinginfo reveal"]/time/text()').extract_first().strip()
+        post_id = response.xpath('//div[@class="postinginfos"]/p/text()').extract_first().split()[2].strip()
  
-        yield{'URL': url, 'Title': title, 'Address':address, 'Description':description, 'Compensation':compensation, 'Employment Type':employment_type}
+
+        yield{'URL': url, 'Title': title, 'Address':address, 'Description':description, 'Compensation':compensation, 
+        'Employment Type':employment_type,'Posted':posted, 'post_id':post_id}
